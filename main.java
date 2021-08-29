@@ -15,13 +15,11 @@ class StringCalculator
                 {
                                 Num = Integer.parseInt(no);
                                 if(Num<0)
-                                {
                                         throw new Exception("negatives not allowed: " + getAllNegatives(num));
-                                }
+                                else if(Num>1000)
+                                        continue;
                                 else
-                                {
                                         sum += Num;
-                                }
                 }
                 return sum;
         }
