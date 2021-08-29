@@ -5,21 +5,28 @@ class StringCalculator
 {
         public static int Add(String numbers) throws Exception
         {
-                String num[] = numbers.split("[^0-9-]|\n");
-                int sum =0, Num = 0;
+                String num[] = numbers.split("[^0-9-]+|\n+");                                                     // spliting the string by multiple occurences of delimiters
+                int sum =0, Num = 0;                                                                              // final sum and individual number
                 if(numbers.length()==0)
                 {
                         return 0;
                 }
                 for(String no : num)
                 {
+                        try
+                        {
                                 Num = Integer.parseInt(no);
                                 if(Num<0)
-                                        throw new Exception("negatives not allowed: " + getAllNegatives(num));
-                                else if(Num>1000)
+                                        throw new Exception("negatives not allowed: " + getAllNegatives(num));  // getting all negative numbers
+                                else if(Num>1000)                                                               // neglecting numbers greater than 1000
                                         continue;
                                 else
-                                        sum += Num;
+                                        sum += Num;                                                             // adding
+                        }
+                        catch(NumberFormatException e)
+                        {
+                                continue;
+                        }
                 }
                 return sum;
         }
@@ -36,10 +43,10 @@ class StringCalculator
         public static void main(String args[]) throws Exception
         {
                 Scanner in = new Scanner(System.in);
-                String inp  = new String();
+                String inp  = new String();                                                                   // getting input
                 inp = in.nextLine();
-                int sum;
-                sum = Add(inp);
+                int sum;                                                                                      // final sum
+                sum = Add(inp);                                                                               // calling function Add
                 System.out.println(sum);
 
         }
