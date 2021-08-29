@@ -3,25 +3,37 @@ import java.lang.*;
 
 class StringCalculator
 {
-        static final String delimiter = "[^0-9-]";
         public static int Add(String numbers) throws Exception
         {
-                String num[] = numbers.split(delimiter);
+                String num[] = numbers.split("[^0-9-]|\n");
                 int sum =0, Num = 0;
-
+                if(numbers.length()==0)
+                {
+                        return 0;
+                }
                 for(String no : num)
                 {
-                        try
-                        {
                                 Num = Integer.parseInt(no);
-                                sum += Num;
-                        }
-                        catch(NumberFormatException e)
-                        {
-                                continue;
-                        }
+                                if(Num<0)
+                                {
+                                        throw new Exception("negatives not allowed: " + getAllNegatives(num));
+                                }
+                                else
+                                {
+                                        sum += Num;
+                                }
                 }
                 return sum;
+        }
+        public static String getAllNegatives(String num[])
+        {
+                StringBuffer neg = new StringBuffer();
+                for(String no : num)
+                {
+                        if(Integer.parseInt(no)<0)
+                                neg.append(no + " ");
+                }
+                return neg.toString();
         }
         public static void main(String args[]) throws Exception
         {
